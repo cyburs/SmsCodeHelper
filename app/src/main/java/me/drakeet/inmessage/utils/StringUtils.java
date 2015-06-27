@@ -113,14 +113,24 @@ public class StringUtils implements StaticObjectInterface {
     public static String tryToGetCaptchas(String str) {
         Pattern continuousNumberPattern = Pattern.compile("[a-zA-Z0-9\\.]+");
         Matcher m = continuousNumberPattern.matcher(str);
+        String mostLikelyCaptchas = "";
+        int currentLevel = -1; //只有字母相似级别为0， 只有字母和数字可能级别为1, 只有数字可能级别为2.
         while (m.find()) {
             if (m.group().length() > 3 && m.group().length() < 8 && !m.group().contains(".")) {
                 if(isNearToKeyWord(m.group(), str)) {
-                    return m.group();
+                    final String strr = m.group();
+                    if(currentLevel == -1) {
+                        mostLikelyCaptchas = m.group();
+                    }
+                    final int level = getLikelyLevel(m.group());
+                    if(level > currentLevel) {
+                        mostLikelyCaptchas = m.group();
+                    }
+                    currentLevel = level;
                 }
             }
         }
-        return "";
+        return mostLikelyCaptchas;
     }
 
     public static String tryToGetCaptchasEn(String str) {
@@ -134,6 +144,17 @@ public class StringUtils implements StaticObjectInterface {
             }
         }
         return "";
+    }
+
+    private static  int getLikelyLevel(String str) {
+        if(str.matches("^[0-9]*$")) {
+            return 2;
+        } else if(str.matches("^[a-zA-Z]*$")) {
+            return 0;
+        } else {
+            return 1;
+        }
+
     }
 
     public static boolean isNearToKeyWordEn(String currentStr, String content) {
