@@ -27,6 +27,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //从Intent中接受信息
+
         Object[] pdus = (Object[]) intent.getExtras().get("pdus");
         for (Object p : pdus) {
             byte[] sms = (byte[]) p;
