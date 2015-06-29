@@ -11,7 +11,7 @@
     <color name="orange">#fdd835</color>
     <color name="line_gray">#1f000000</color>
     <!--<color name="message_date_grey">#f0f0f0</color>-->
-    <color name="message_date_grey">#eceff1</color>
+    <color name="message_date_grey">#e7e7e7</color>
     <color name="pink">#e91e63</color>
     <color name="half_black">#808080</color>
     <color name="pink_pressed">#ec407a</color>
