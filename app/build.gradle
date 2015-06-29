@@ -4,6 +4,8 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
+def key = new File('s.keystore')
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -44,7 +46,7 @@ android {
 
     signingConfigs {
         app1 {
-            storeFile file("s.keystore")
+            storeFile key
             storePassword STOREPASS
             keyAlias KEYALIAS
             keyPassword KEYPASS
@@ -60,7 +62,12 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.app1
+            if (key.exists()) {
+                println "using drakeet's key"
+                signingConfig signingConfigs.app1
+            } else {
+                println "no key"
+            }
 
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
