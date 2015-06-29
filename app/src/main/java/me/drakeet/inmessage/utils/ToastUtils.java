@@ -1,6 +1,5 @@
 package me.drakeet.inmessage.utils;
 
-import android.content.Context;
 import android.widget.Toast;
 
 import me.drakeet.inmessage.App;
@@ -10,17 +9,7 @@ import me.drakeet.inmessage.App;
  */
 public class ToastUtils{
 
-    Context mContext;
-
     private ToastUtils() {
-    }
-
-    private static void show(Context context, int resId, int duration) {
-        Toast.makeText(context, resId, duration).show();
-    }
-
-    private static void show(Context context, String message, int duration) {
-        Toast.makeText(context, message, duration).show();
     }
 
     public static void showShort(int resId) {

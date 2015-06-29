@@ -11,8 +11,7 @@ import me.drakeet.inmessage.model.Message;
  */
 public class StringUtils implements StaticObjectInterface {
 
-    private StringUtils() {
-    }
+    private StringUtils() {}
 
     /**
      * 判断字符串中子字符串出现次数

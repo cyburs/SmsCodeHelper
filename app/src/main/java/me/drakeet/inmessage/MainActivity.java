@@ -49,11 +49,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @InjectView(R.id.message_rv)
     ObservableRecyclerView mRecyclerView;
 
-    NumberProgressBar mNumberProgressBar;
-    MainMessageAdapter mMainMessageAdapter;
-    WeakHandler mHandler;
-    private int mCurrentCaptchasCount = 0;
+    private NumberProgressBar mNumberProgressBar;
+    private MainMessageAdapter mMainMessageAdapter;
     private List<Message> mMessages;
+    private WeakHandler mHandler;
+    private int mCurrentCaptchasCount = 0;
     private boolean mIsRefreshing = false;
     private boolean mStopDelete;
     private boolean mShowResult;
@@ -107,7 +107,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void setAdapter() {
-        mMainMessageAdapter = new MainMessageAdapter(this, mMessages);
+        mMainMessageAdapter = new MainMessageAdapter(mMessages);
         mMainMessageAdapter.setShowResult(mShowResult);
         mRecyclerView.setAdapter(mMainMessageAdapter);
         mMainMessageAdapter.setOnItemClickListener(
@@ -128,7 +128,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private void getAllMessage() {
         setRefreshing(true);
         mIsRefreshing = true;
-        TaskUtils.executeAsyncTask(
+        TaskUtils.execute(
                 new AsyncTask<Object, Object, Object>() {
                     @Override
                     protected Object doInBackground(Object... params) {
@@ -200,7 +200,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
                                                                            }
                                                                        }
-                                                               ).create();
+                                                               )
+                                                               .create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
@@ -212,20 +213,14 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mNumberProgressBar = (NumberProgressBar) addLayout.findViewById(R.id.number_progress_bar);
         AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this).setTitle(
                 getString(R.string.deleting_verification_code)
-        )
-                                                                             .setView(addLayout)
-                                                                             .setNegativeButton(
-                                                                                     android.R.string.cancel,
-                                                                                     new DialogInterface.OnClickListener() {
-                                                                                         @Override
-                                                                                         public void onClick(
-                                                                                                 DialogInterface dialog,
-                                                                                                 int which) {
-                                                                                             mStopDelete = true;
-                                                                                         }
-                                                                                     }
-                                                                             )
-                                                                             .create();
+        ).setView(addLayout).setNegativeButton(
+                android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mStopDelete = true;
+                    }
+                }
+        ).create();
         deleteDialog.setCanceledOnTouchOutside(false);
         deleteDialog.setOnKeyListener(
                 new DialogInterface.OnKeyListener() {
@@ -264,7 +259,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                                                                      .create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
-        TaskUtils.executeAsyncTask(
+        TaskUtils.execute(
                 new AsyncTask<Object, Object, String>() {
                     @Override
                     protected String doInBackground(Object... params) {
@@ -342,7 +337,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private void deleteAllCaptchasMessage(final AlertDialog deleteDialog) {
         mStopDelete = false;
         final SmsUtils smsUtils = new SmsUtils(MainActivity.this);
-        TaskUtils.executeAsyncTask(
+        TaskUtils.execute(
                 new AsyncTask<Object, Object, String>() {
                     @Override
                     protected String doInBackground(Object... params) {
@@ -371,7 +366,12 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     protected void onPostExecute(String o) {
                         super.onPostExecute(o);
                         deleteDialog.dismiss();
-                        ToastUtils.showShort(String.format(getString(R.string.successfully_delete_verification_code_numbers), o));
+                        ToastUtils.showShort(
+                                String.format(
+                                        getString(R.string.successfully_delete_verification_code_numbers),
+                                        o
+                                )
+                        );
                         getAllMessage();
                     }
 
@@ -458,9 +458,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.menu_about) {
             startActivity(new Intent(this, AboutActivity.class));

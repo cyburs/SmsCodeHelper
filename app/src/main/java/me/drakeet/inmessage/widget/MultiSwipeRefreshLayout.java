@@ -25,7 +25,8 @@ import android.util.AttributeSet;
 import me.drakeet.inmessage.R;
 
 /**
- * Created by drakeet on 1/3/15.
+ *
+ * from io 2014
  */
 public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
 
