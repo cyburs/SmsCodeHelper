@@ -36,9 +36,8 @@ public class DiscernCaptchasService extends Service {
             // 弹两遍，加长时间。
             ToastUtils.showLong(String.format(getResources().getString(R.string.tip), message.getCaptchas()));
             ToastUtils.showLong(String.format(getResources().getString(R.string.tip), message.getCaptchas()));
+            NotificationUtils.showMessageInNotificationBar(DiscernCaptchasService.this, message);
         }
-        NotificationUtils.showMessageInNotificationBar(DiscernCaptchasService.this, message);
-
 
         return START_STICKY;
     }
