@@ -26,7 +26,11 @@ public class NotificationUtils implements StaticObjectInterface {
 
         if (message.getCaptchas() != null) {
             remoteViews.setTextViewText(
-                    R.id.tv_content, String.format(context.getResources().getString(R.string.notify_msg), message.getCaptchas())
+                    R.id.tv_content,
+                    String.format(
+                            context.getResources().getString(R.string.notify_msg),
+                            message.getCaptchas()
+                    )
             );
         } else {
             remoteViews.setTextViewText(R.id.tv_content, message.getContent());

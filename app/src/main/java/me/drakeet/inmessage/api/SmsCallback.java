@@ -8,5 +8,5 @@ import me.drakeet.inmessage.model.Message;
  * Created by shengkun on 15/2/9.
  */
 public interface SmsCallback {
-    void done(List<Message> examples,String errorMessage);
+    void done(List<Message> examples, String errorMessage);
 }
