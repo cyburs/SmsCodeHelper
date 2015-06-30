@@ -104,9 +104,17 @@ public class StringUtils implements StaticObjectInterface {
     }
 
     public static boolean isPersonalMoblieNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        Matcher m = p.matcher(mobiles);
-        return m.matches();
+        if(mobiles != null) {
+            Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+            Matcher m = p.matcher(mobiles);
+            if (m == null) {
+                return false;
+            }
+            else {
+                return m.matches();
+            }
+        }
+        return false;
     }
 
     public static String tryToGetCaptchas(String str) {
