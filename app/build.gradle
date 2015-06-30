@@ -4,7 +4,7 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
-def key = new File('s.keystore')
+def key = file('s.keystore')
 
 android {
     compileSdkVersion 22
@@ -14,8 +14,8 @@ android {
         applicationId "me.drakeet.inmessage"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 22
-        versionName "1.2.2"
+        versionCode 23
+        versionName "1.2.3"
     }
     sourceSets {
         main {

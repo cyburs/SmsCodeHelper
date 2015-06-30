@@ -69,9 +69,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mShowResult = false;
         setupActionBar();
         initRecyclerView();
-
         MobclickAgent.updateOnlineConfig(this);
-
         checkFirstTimeUse();
     }
 
