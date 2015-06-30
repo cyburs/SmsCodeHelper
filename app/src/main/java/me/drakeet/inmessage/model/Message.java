@@ -2,12 +2,13 @@ package me.drakeet.inmessage.model;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by shengkun on 15/6/5.
  */
-public class Message extends DataSupport {
+public class Message extends DataSupport implements Serializable {
 
     private String sender;
     private String content;
