@@ -14,8 +14,8 @@ android {
         applicationId "me.drakeet.inmessage"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 21
-        versionName "1.2.1"
+        versionCode 22
+        versionName "1.2.2"
     }
     sourceSets {
         main {
@@ -47,9 +47,9 @@ android {
     signingConfigs {
         app1 {
             storeFile key
-            storePassword STOREPASS
-            keyAlias KEYALIAS
-            keyPassword KEYPASS
+            storePassword project.hasProperty('STOREPASS') ? STOREPASS : ''
+            keyAlias project.hasProperty('KEYALIAS') ? KEYALIAS : ''
+            keyPassword project.hasProperty('KEYPASS') ? KEYPASS : ''
         }
     }
 

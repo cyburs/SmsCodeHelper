@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
@@ -96,6 +97,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new SeparatorItemDecoration(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setOnTouchListener(
                 new View.OnTouchListener() {
                     @Override
@@ -433,7 +435,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                             mShowResult = isChecked;
                             if (mMainMessageAdapter != null) {
                                 mMainMessageAdapter.setShowResult(isChecked);
-                                mMainMessageAdapter.notifyDataSetChanged();
+                                mMainMessageAdapter.notifyItemRangeChanged(0, mMessages.size());
                                 if (isChecked)
                                     ToastUtils.showShort(getString(R.string.open_simplified));
                                 else
