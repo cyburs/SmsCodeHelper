@@ -124,7 +124,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         );
     }
 
-
     private void getAllMessage() {
         setRefreshing(true);
         mIsRefreshing = true;
@@ -182,23 +181,17 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(getString(R.string.empty_verification_code))
                 .setMessage(getString(R.string.str_clear_messages_hint))
                 .setPositiveButton(
-                        android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
+                        android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(
-                                    DialogInterface dialog,
-                                    int which) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 showDeleteDialog();
                             }
                         }
                 )
                 .setNegativeButton(
-                        android.R.string.cancel,
-                        new DialogInterface.OnClickListener() {
+                        android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(
-                                    DialogInterface dialog,
-                                    int which) {
+                            public void onClick(DialogInterface dialog, int which) {
 
                             }
                         }
@@ -249,12 +242,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(getString(R.string.str_check_bussiness_hint))
                 .setMessage(getString(R.string.str_doing_hint))
                 .setPositiveButton(
-                        android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
+                        android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(
-                                    DialogInterface dialog,
-                                    int which) {
+                            public void onClick(DialogInterface dialog, int which) {
                             }
                         }
                 )
@@ -322,12 +312,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(message.getSender())
                 .setMessage(message.getContent())
                 .setPositiveButton(
-                        android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
+                        android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(
-                                    DialogInterface dialog,
-                                    int which) {
+                            public void onClick(DialogInterface dialog, int which) {
                             }
                         }
                 )

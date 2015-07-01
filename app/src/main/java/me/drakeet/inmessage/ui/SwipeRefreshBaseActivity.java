@@ -41,8 +41,6 @@ public abstract class SwipeRefreshBaseActivity extends AppCompatActivity {
 
     public void requestDataRefresh() {}
 
-    ;
-
     public void setRefreshing(boolean refreshing) {
         if (mSwipeRefreshLayout == null) {
             return;

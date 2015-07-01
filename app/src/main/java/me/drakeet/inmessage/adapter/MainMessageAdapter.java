@@ -111,6 +111,7 @@ public class MainMessageAdapter extends RecyclerView.Adapter<MainMessageAdapter.
 
     @Override
     public int getItemViewType(int position) {
+        if (mList.size() == 0) return ITEM_TYPE.ITEM_TYPE_DATE.ordinal(); // 解决快速滚动下拉带来的越界异常
         return mList.get(position).getIsMessage() ? ITEM_TYPE.ITEM_TYPE_MESSAGE.ordinal() : ITEM_TYPE.ITEM_TYPE_DATE.ordinal();
     }
 
