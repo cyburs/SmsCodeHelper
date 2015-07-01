@@ -148,7 +148,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     @Override
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
-                        setAdapter();
+                        if (mMessages != null && mMessages.size() != 0) {
+                            setAdapter();
+                        }
                         setRefreshing(false);
                         mIsRefreshing = false;
                     }
@@ -178,30 +180,30 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void showConfirmDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(getString(R.string.empty_verification_code))
-                                                               .setMessage(getString(R.string.str_clear_messages_hint))
-                                                               .setPositiveButton(
-                                                                       android.R.string.ok,
-                                                                       new DialogInterface.OnClickListener() {
-                                                                           @Override
-                                                                           public void onClick(
-                                                                                   DialogInterface dialog,
-                                                                                   int which) {
-                                                                               showDeleteDialog();
-                                                                           }
-                                                                       }
-                                                               )
-                                                               .setNegativeButton(
-                                                                       android.R.string.cancel,
-                                                                       new DialogInterface.OnClickListener() {
-                                                                           @Override
-                                                                           public void onClick(
-                                                                                   DialogInterface dialog,
-                                                                                   int which) {
+                .setMessage(getString(R.string.str_clear_messages_hint))
+                .setPositiveButton(
+                        android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
+                                showDeleteDialog();
+                            }
+                        }
+                )
+                .setNegativeButton(
+                        android.R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
 
-                                                                           }
-                                                                       }
-                                                               )
-                                                               .create();
+                            }
+                        }
+                )
+                .create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
@@ -245,18 +247,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void showBussinessDialog() {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(getString(R.string.str_check_bussiness_hint))
-                                                                     .setMessage(getString(R.string.str_doing_hint))
-                                                                     .setPositiveButton(
-                                                                             android.R.string.ok,
-                                                                             new DialogInterface.OnClickListener() {
-                                                                                 @Override
-                                                                                 public void onClick(
-                                                                                         DialogInterface dialog,
-                                                                                         int which) {
-                                                                                 }
-                                                                             }
-                                                                     )
-                                                                     .create();
+                .setMessage(getString(R.string.str_doing_hint))
+                .setPositiveButton(
+                        android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
+                            }
+                        }
+                )
+                .create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
         TaskUtils.execute(
@@ -318,18 +320,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void showDetailSMS(Message message) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(message.getSender())
-                                                               .setMessage(message.getContent())
-                                                               .setPositiveButton(
-                                                                       android.R.string.ok,
-                                                                       new DialogInterface.OnClickListener() {
-                                                                           @Override
-                                                                           public void onClick(
-                                                                                   DialogInterface dialog,
-                                                                                   int which) {
-                                                                           }
-                                                                       }
-                                                               )
-                                                               .create();
+                .setMessage(message.getContent())
+                .setPositiveButton(
+                        android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
+                            }
+                        }
+                )
+                .create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
@@ -417,7 +419,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         final MenuItem switchItem = menu.findItem(R.id.menu_show_result);
         MenuItemCompat.setActionView(switchItem, R.layout.view_switchcompat);
         final SwitchCompat switchCompat = (SwitchCompat) switchItem.getActionView()
-                                                                   .findViewById(R.id.switchCompat);
+                .findViewById(R.id.switchCompat);
         switchCompat.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
