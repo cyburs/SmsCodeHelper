@@ -222,29 +222,25 @@ public class TimeUtils {
             return TODAY;
         }
 
-        if(isSameYear(nowCalendar, cal)) {
-            if(isSameMonth(nowCalendar, cal)) {
-                if(isSameWeek(nowCalendar, cal)) {
-                    if (isYesterDay(nowCalendar, cal)) {
-                        return YESTERDAY;
-                    } else if (isTheDayBeforeYesterday(nowCalendar, cal)) {
-                        return THE_DAY_BEFORE_YESTERDAY;
-                    } else {
-                        return WEEK;
-                    }
-                }
-                else {
-                    return MONTH;
-                }
+        if(isSameWeek(nowCalendar, cal)) {
+            if (isYesterDay(nowCalendar, cal)) {
+                return YESTERDAY;
+            } else if (isTheDayBeforeYesterday(nowCalendar, cal)) {
+                return THE_DAY_BEFORE_YESTERDAY;
+            } else {
+                return WEEK;
             }
-            else {
+        } else {
+            if(isSameMonth(nowCalendar, cal)) {
+                return MONTH;
+            }
+            else if(isSameYear(nowCalendar, cal)) {
                 int month = cal.get(Calendar.MONTH) + 1;
                 return month + "月";
+            } else {
+                int month = cal.get(Calendar.MONTH) + 1;
+                return cal.get(Calendar.YEAR) + "年" + month + "月";
             }
-        }
-        else {
-            int month = cal.get(Calendar.MONTH) + 1;
-            return cal.get(Calendar.YEAR) + "年" + month + "月";
         }
     }
 
