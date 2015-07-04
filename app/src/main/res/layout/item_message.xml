@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/message_bg_color"
-    android:elevation="1dp"
+    android:elevation="2dp"
     android:foreground="?selectableItemBackground">
 
     <RelativeLayout
