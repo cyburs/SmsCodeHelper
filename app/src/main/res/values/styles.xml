@@ -21,4 +21,9 @@
         <item name="android:paddingTop">16dp</item>
     </style>
 
+
+    <style name="CollapsingToolbarTitleStyle" parent="Widget.Design.CollapsingToolbar">
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
 </resources>

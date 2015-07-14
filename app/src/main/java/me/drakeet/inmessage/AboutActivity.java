@@ -2,6 +2,7 @@ package me.drakeet.inmessage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,9 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
@@ -24,10 +22,10 @@ public class AboutActivity extends AppCompatActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-    @InjectView(R.id.sv_about)
-    ObservableScrollView mScrollView;
     @InjectView(R.id.tv_version)
     TextView mVersionTextView;
+    @InjectView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +35,10 @@ public class AboutActivity extends AppCompatActivity {
 
         setUpVersionName();
 
-        final int headerHeight = getResources().getDimensionPixelSize(R.dimen.about_header_height);
-        mToolbar.setTitle("");
+        mCollapsingToolbarLayout.setTitle(getString(R.string.about));
+
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -49,29 +48,6 @@ public class AboutActivity extends AppCompatActivity {
                 }
         );
 
-        mScrollView.setScrollViewCallbacks(
-                new ObservableScrollViewCallbacks() {
-                    @Override
-                    public void onScrollChanged(int scrollY, boolean firstScroll,
-                                                boolean dragging) {
-                        if (scrollY > headerHeight + 192) {
-                            mScrollView.setBackgroundColor(getResources().getColor(R.color.background));
-                        } else {
-                            mScrollView.setBackgroundColor(getResources().getColor(R.color.transparent));
-                        }
-                    }
-
-                    @Override
-                    public void onDownMotionEvent() {
-
-                    }
-
-                    @Override
-                    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-
-                    }
-                }
-        );
     }
 
     private void setUpVersionName() {
@@ -86,9 +62,13 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_share) {
-            onClickShare();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.menu_share:
+                onClickShare();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

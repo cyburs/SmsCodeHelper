@@ -11,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -23,7 +24,6 @@ import android.widget.CompoundButton;
 
 import com.badoo.mobile.util.WeakHandler;
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
 import org.litepal.crud.DataSupport;
@@ -48,7 +48,7 @@ import me.drakeet.inmessage.widget.SeparatorItemDecoration;
 public class MainActivity extends SwipeRefreshBaseActivity {
 
     @InjectView(R.id.message_rv)
-    ObservableRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     private NumberProgressBar mNumberProgressBar;
     private MainMessageAdapter mMainMessageAdapter;
