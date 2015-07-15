@@ -284,31 +284,6 @@
                     tools:ignore="HardcodedText"/>
             </RelativeLayout>
 
-            <RelativeLayout
-                style="@style/LisPaddingStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card">
-
-                <TextView
-                    android:id="@+id/tv_fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="floating-action-button - Jerzy Chalupski"
-                    android:textColor="@color/md_grey_800"
-                    tools:ignore="HardcodedText"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_fab"
-                    android:text="https://github.com/futuresimple/android-floating-action-button\nApache Software License 2.0"
-                    android:textColor="@color/md_grey_600"
-                    android:textSize="@dimen/open_source_lis_text_size"
-                    tools:ignore="HardcodedText"/>
-            </RelativeLayout>
-
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

@@ -35,7 +35,7 @@ public class AboutActivity extends AppCompatActivity {
 
         setUpVersionName();
 
-        mCollapsingToolbarLayout.setTitle(getString(R.string.about));
+        mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,7 +64,7 @@ public class AboutActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                this.finish();
                 return true;
             case R.id.menu_share:
                 onClickShare();
