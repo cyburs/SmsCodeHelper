@@ -69,7 +69,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:padding="12dp"
             android:orientation="vertical">
 
             <TextView
@@ -82,12 +82,12 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="16dp"
                 android:background="@drawable/card">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
                     android:autoLink="web"
                     android:text="@string/introduce"
                     android:textColor="@color/md_grey_800"
@@ -164,6 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_drakeet"
+                    android:paddingBottom="16dp"
                     android:layout_toRightOf="@id/ig_avatar_drakeet"
                     android:text="@string/developer_and_designer"
                     android:textColor="@color/md_grey_600"/>

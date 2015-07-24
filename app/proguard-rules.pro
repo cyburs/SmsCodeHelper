@@ -58,12 +58,9 @@
 -keep public class * extends android.os.Binder
 
 # Keep the support library
--keep class android.support.v4.** { *; }
--keep interface android.support.v4.** { *; }
+-keep class android.support.** { *; }
+-keep interface android.support.** { *; }
 
-# Keep the support library
--keep class android.support.v7.** { *; }
--keep interface android.support.v7.** { *; }
 
 ## GSON 2.2.4 specific rules ##
 
@@ -167,7 +164,7 @@
     native <methods>;
 }
 
--keep class me.drakeet.inmessage.model.** { *;}
+-keep class me.drakeet.inmessage.** { *;}
 -keep class cn.smssdk.** { *;}
 
 -keepclasseswithmembernames class * {
