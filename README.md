@@ -35,3 +35,11 @@ It is very light, but also adhering to the usual good design and user-friendly, 
 
 
 We open source, good design, not indiscriminately use rights. Just hope if you like it, you can share with your friends, because good things need to share with others in order to let it grow, every share is our power, thanks!</string>
+
+## About me
+
+I am a student in China, I love reading pure literature, love Japanese culture and Hongkong music. At the same time, it is also very obsessed with writing code. If you have any questions or want to make friends with me, you can write to me: drakeet.me@gmail.com
+
+In addition, my blog: http://drakeet.me
+
+If you like my open source projects, you can follow me: https://github.com/drakeet
