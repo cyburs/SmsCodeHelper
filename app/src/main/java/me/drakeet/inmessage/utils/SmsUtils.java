@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import org.litepal.crud.DataSupport;
 
@@ -30,7 +31,8 @@ public class SmsUtils {
         mContext = context;
     }
 
-    public static final Uri MMSSMS_ALL_MESSAGE_URI = Uri.parse("content://sms/");
+    //只检查收件箱的验证码信息
+    public static final Uri MMSSMS_ALL_MESSAGE_URI = Uri.parse("content://sms/inbox");
     public static final Uri ALL_MESSAGE_URI = MMSSMS_ALL_MESSAGE_URI.buildUpon().
             appendQueryParameter("simple", "true").build();
 
@@ -52,15 +54,14 @@ public class SmsUtils {
             String strAddress = cursor.getString(indexAddress);
             if (!StringUtils.isPersonalMoblieNO(strAddress)) {
                 boolean isCpatchasMessage = false;
-                if(!StringUtils.isContainsChinese(strbody)) {
-                    if(StringUtils.isCaptchasMessageEn(strbody) && !StringUtils.tryToGetCaptchasEn(strbody).equals("")) {
+                if (!StringUtils.isContainsChinese(strbody)) {
+                    if (StringUtils.isCaptchasMessageEn(strbody) && !StringUtils.tryToGetCaptchasEn(strbody).equals("")) {
                         isCpatchasMessage = true;
                     }
-                }
-                else if(StringUtils.isCaptchasMessage(strbody) && !StringUtils.tryToGetCaptchas(strbody).equals("")) {
+                } else if (StringUtils.isCaptchasMessage(strbody) && !StringUtils.tryToGetCaptchas(strbody).equals("")) {
                     isCpatchasMessage = true;
                 }
-                if(isCpatchasMessage) {
+                if (isCpatchasMessage) {
                     int date = cursor.getColumnIndex("date");
                     //格式化短信日期提示
                     SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm");
@@ -91,24 +92,26 @@ public class SmsUtils {
                     if (resultContent != null) {
                         message.setResultContent(resultContent);
                     }
+                    //检查收件箱地址把所有的验证码短信放到smsMessages
                     smsMessages.add(message);
                 }
             }
         }
 
+
         List<Message> localMessages = DataSupport.where("readStatus = ?", "0").order("date asc").find(Message.class);
-        for(Message message:localMessages) {
-            if(message.getDate() != null) {
+        for (Message message : localMessages) {
+            if (message.getDate() != null) {
                 message.setIsMessage(true);
                 boolean find = false;
-                for(int u = 0; u< smsMessages.size();u ++ ) {
-                    if(message.getDate().getTime() > smsMessages.get(u).getDate().getTime()) {
+                for (int u = 0; u < smsMessages.size(); u++) {
+                    if (message.getDate().getTime() > smsMessages.get(u).getDate().getTime()) {
                         smsMessages.add(u, message);
                         find = true;
                         break;
                     }
                 }
-                if(!find) {
+                if (!find) {
                     smsMessages.add(message);
                 }
 
@@ -117,7 +120,7 @@ public class SmsUtils {
 
 
         List<Message> unionMessages = new ArrayList<>();
-        for(Message message: smsMessages) {
+        for (Message message : smsMessages) {
             String group = TimeUtils.getInstance().getDateGroup(message.getDate());
             if (dateGroups.size() == 0) {
                 dateGroups.add(group);
@@ -134,22 +137,21 @@ public class SmsUtils {
                     unionMessages.add(dateMessage);
                 }
             }
+
             unionMessages.add(message);
         }
 
-
-
+        Log.i("TAG",unionMessages.size()+"");
         cursor.close();
         return unionMessages;
     }
 
     /**
      * 删除手机短信
-     *
-     * */
+     */
     public int deleteSms(String smsId) {
         final Uri SMS_URI = Uri.parse("content://sms/");
-        return mContext.getContentResolver().delete(SMS_URI,"_id=?",new String[]{smsId});
+        return mContext.getContentResolver().delete(SMS_URI, "_id=?", new String[]{smsId});
     }
 
     public String getContactNameFromPhoneBook(String phoneNum) {
