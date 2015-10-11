@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.util.Log;
 
 import org.litepal.crud.DataSupport;
 
@@ -141,7 +140,6 @@ public class SmsUtils {
             unionMessages.add(message);
         }
 
-        Log.i("TAG",unionMessages.size()+"");
         cursor.close();
         return unionMessages;
     }
