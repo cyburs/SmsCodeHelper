@@ -147,7 +147,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     @Override
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
-                        if (mMessages != null && mMessages.size() != 0) {
+                        /*
+                            && mMessages.size() != 0 应该去掉,即使没有验证码短信,也应该更新
+                            不然用户从系统收件箱删除短信之后再回到应用点击会崩溃
+                         */
+                        if (mMessages != null) {
                             setAdapter();
                         }
                         setRefreshing(false);
